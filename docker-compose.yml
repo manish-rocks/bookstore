@@ -1,0 +1,19 @@
+version: '2.2'
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8050
+    volumes:
+      - .:/CODE
+    ports:
+      - 8050:8050
+    depends_on:
+      - db
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+volumes:
+  postgres_data:
