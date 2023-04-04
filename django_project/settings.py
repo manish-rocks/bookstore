@@ -32,14 +32,14 @@ ALLOWED_HOSTS = ['0.0.0.0']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',
+    'django.contrib.auth', # Yoohoo ! ! ! !
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # local
     "accounts.apps.AccountsConfig",
-    "pages.apps.PagesConfig" # new
+    "pages.apps.PagesConfig"
 ]
 AUTH_USER_MODEL = "accounts.CustomUser" # new
 
@@ -129,3 +129,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = "home"  # new
+
+LOGOUT_REDIRECT_URL = "home"  # new
