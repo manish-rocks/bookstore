@@ -20,7 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # user management
-    path("accounts/",include("django.contrib.auth.urls")), # new
+    path("accounts/",include("allauth.urls")), # new
 
     # local apps
     path("",include('pages.urls')), # new

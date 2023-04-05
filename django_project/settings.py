@@ -38,9 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    "django.contrib.sites",  # new
+
     # Third-party
     "crispy_forms",  # new
     "crispy_bootstrap5",  # new
+    "allauth",  # new
+    "allauth.account",  # new
 
     # local
     "accounts.apps.AccountsConfig",
@@ -152,3 +156,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = "home"  # new
 
 LOGOUT_REDIRECT_URL = "home"  # new
+
+ACCOUNT_SESSION_REMEMBER = True  # new
+
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False  # new
+
+ACCOUNT_USERNAME_REQUIRED = False  # new
+ACCOUNT_AUTHENTICATION_METHOD = "email"  # new
+ACCOUNT_EMAIL_REQUIRED = True  # new
+ACCOUNT_UNIQUE_EMAIL = True  # new
+
+
+
+# django-allauth config
+SITE_ID = 1
+AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",  # new
+)
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # new
