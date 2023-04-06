@@ -13,6 +13,15 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from environs import Env # new
 
+
+# django-debug-toolbar
+import socket
+
+
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
+
+
 env = Env() # new
 env.read_env() # new
 
@@ -50,6 +59,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",  # new
     "allauth",  # new
     "allauth.account",  # new
+    "debug_toolbar",  # new
 
     # local
     "accounts.apps.AccountsConfig",
@@ -67,6 +77,8 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"  # new
 AUTH_USER_MODEL = "accounts.CustomUser" # new
 
 MIDDLEWARE = [
+
+    "django.middleware.cache.UpdateCacheMiddleware",  # new
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -74,6 +86,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",  # new
+    "django.middleware.cache.FetchFromCacheMiddleware",  # new
 ]
 
 ROOT_URLCONF = 'django_project.urls'
@@ -195,3 +209,7 @@ DEFAULT_FROM_EMAIL = "admin@djangobookstore.com"  # new
 
 MEDIA_URL = "/media/"  # new
 MEDIA_ROOT = BASE_DIR / "media"  # new
+CACHE_MIDDLEWARE_ALIAS = "default"
+
+CACHE_MIDDLEWARE_SECONDS = 604800
+CACHE_MIDDLEWARE_KEY_PREFIX = ""
