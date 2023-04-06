@@ -191,3 +191,7 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"  # new
 
 
 DEFAULT_FROM_EMAIL = "admin@djangobookstore.com"  # new
+
+
+MEDIA_URL = "/media/"  # new
+MEDIA_ROOT = BASE_DIR / "media"  # new
