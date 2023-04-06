@@ -19,7 +19,9 @@ from django.conf import settings  # new
 from django.conf.urls.static import static  # new
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
+
+    path("anything-but-admin/", admin.site.urls),  # new
 
     # user management
     path("accounts/",include("allauth.urls")), # new
