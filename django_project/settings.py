@@ -39,7 +39,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 
 DEBUG = env.bool("DJANGO_DEBUG",defult=False)  # new
-ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]  # new
+ALLOWED_HOSTS = [".azurewebsites.net", "localhost", "127.0.0.1","0.0.0.0"]  # new
 
 
 # Application definition
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    "whitenoise.runserver_nostatic",  # new
     'django.contrib.staticfiles',
 
     "django.contrib.sites",  # new
@@ -87,6 +88,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",  # new
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # new
     "django.middleware.cache.FetchFromCacheMiddleware",  # new
 ]
 
@@ -172,7 +174,10 @@ STATICFILES_DIRS = [BASE_DIR / "static"]  # new
 STATIC_ROOT = BASE_DIR / "staticfiles"  # new
 
 
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"  # new
+# STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"  # new
+
+
+STATICFILES_STORAGE ="whitenoise.storage.CompressedManifestStaticFilesStorage"  # new
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -222,3 +227,4 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool("DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS
 SECURE_HSTS_PRELOAD = env.bool("DJANGO_SECURE_HSTS_PRELOAD", default=True)
 SESSION_COOKIE_SECURE = env.bool("DJANGO_SESSION_COOKIE_SECURE", default=True)
 CSRF_COOKIE_SECURE = env.bool("DJANGO_CSRF_COOKIE_SECURE", default=True)
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")  # new
